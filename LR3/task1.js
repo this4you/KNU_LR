@@ -17,7 +17,7 @@ function task1() {
             cities = {
                 data: ["Киев", "Москва", "Барселона"],
                 value: "Хотели бы вы жить в "
-            }   
+            }
         ],
         resultPaterns: [
             'Ви укладите шлюб з q2, та у вас буде q0 дітей.',
@@ -26,37 +26,37 @@ function task1() {
     };
 
     function askQuestion(question) {
-        let data = question.data, 
+        let data = question.data,
             dataNumbers = question.data.length;
 
-        for(let i = 0; i < dataNumbers; i++ ){
-            if(confirm(question.value + data[i] + " ?"))
-            return question.data[i]
+        for (let i = 0; i < dataNumbers; i++) {
+            if (confirm(question.value + data[i] + " ?"))
+                return question.data[i]
         }
         return "";
     }
-    
+
     (function startGame(config) {
-        if(!confirm("Готові грати в гру?")) return alert("Бувай =(");
-        
-        let {questions, resultPaterns} = config,
+        if (!confirm("Готові грати в гру?")) return alert("Бувай =(");
+
+        let { questions, resultPaterns } = config,
             questionsNumbers = questions.length,
             answers = [];
 
-        for(let i = 0; i < questionsNumbers; i++) {
+        for (let i = 0; i < questionsNumbers; i++) {
             answers[i] = askQuestion(questions[i]);
         }
 
-        do{
+        do {
             prediction = prompt(`Для вас є ${resultPaterns.length} передбачень, яке ви хочете побачити?`);
-        } while(prediction == undefined || prediction < 1 || prediction > resultPaterns.length)
-    
-        alert(getResultPrediction(prediction-1));
+        } while (prediction == undefined || prediction < 1 || prediction > resultPaterns.length)
+
+        alert(getResultPrediction(prediction - 1));
 
         function getResultPrediction(predictionNumber) {
             let prediction = resultPaterns[predictionNumber]
-            for(let i = 0; i < answers.length; i++) {
-                prediction = prediction.replace("q"+i, answers[i]);
+            for (let i = 0; i < answers.length; i++) {
+                prediction = prediction.replace("q" + i, answers[i]);
             }
             return prediction;
         }
