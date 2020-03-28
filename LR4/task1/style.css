@@ -19,7 +19,8 @@
 .input-group .input-group-text {
     width: 100%;
 }
-.picture img {
+#image {
     max-width: 800px;
     max-height: 600px;
+    border-style: solid;
 }

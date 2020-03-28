@@ -14,24 +14,24 @@
     <div class="wrap">
         <section class="picture-section">
             <div class="picture">
-                <img src="./img/Planety.jpg">
+                <img id="image" border="5" src="./img/Planety.jpg">
             </div>
         </section>
         <section class="setting-section">
-            <form action="" class="ui-form">
+            <form class="ui-form" id="setting-form">
                 <p class="h4">Зміна розмірів</p>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Width">Ширина (width)</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Width" aria-label="Width"
+                    <input type="text" class="form-control" data-style-property="width" required placeholder="Width" aria-label="Width"
                         aria-describedby="Width">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Height">Висота (height)</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Height" aria-label="Height"
+                    <input type="text" class="form-control" data-style-property="height" required placeholder="Height" aria-label="Height"
                         aria-describedby="Height">
                 </div>
                 <p class="h4">Зміна рамки</p>
@@ -39,14 +39,14 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Thickness">Товщина рамки</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Thickness" aria-label="Thickness"
+                    <input type="text" class="form-control" data-style-property="border-width" data-style-dimension="px" required placeholder="Thickness" aria-label="Thickness"
                         aria-describedby="Thickness">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Colour">Колір рамки</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Colour" aria-label="Colour"
+                    <input type="text" class="form-control" data-style-property="border-color" required placeholder="Colour" aria-label="Colour"
                         aria-describedby="Colour">
                 </div>
                 <p class="h4">Додатково</p>
@@ -54,15 +54,15 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="AlternateText">Альтернативний текст</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="" aria-label="AlternateText"
+                    <input type="text" class="form-control" required placeholder="" aria-label="AlternateText"
                         aria-describedby="AlternateText">
                 </div>
-                <button type="button" class="btn btn-secondary btn-lg btn-block">Застосувати параметри</button>
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">Застосувати параметри</button>
             </form>
         </section>
 
     </div>
-
+<script src="script.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
