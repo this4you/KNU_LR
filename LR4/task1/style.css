@@ -24,3 +24,7 @@
     max-height: 600px;
     border-style: solid;
 }
+
+.not-valid {
+    border-color: red !important;
+}
