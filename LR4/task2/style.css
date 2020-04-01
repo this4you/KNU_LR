@@ -1,0 +1,29 @@
+.setting-section button {
+    margin-left: 30px;
+}
+.display-section {
+    height:90vh;
+}
+.diagram {
+    height: 100%;
+    width: 100%;
+    background-color:rgba(104, 0, 90, 0.61);
+    display: flex;
+    justify-content: space-around;
+    align-items:  flex-end;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.column {
+    width: 40%;
+    height: 90%;
+    background-color: rgba(69, 241, 35, 0.603);
+    text-align: center;
+}
+.column .color {
+    width: 100%;
+    background-color:#fbff06d5;
+    height: 90%;
+    margin-bottom: 10px;
+}
+
