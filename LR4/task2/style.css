@@ -17,12 +17,12 @@
 .column {
     width: 40%;
     height: 90%;
-    background-color: rgba(69, 241, 35, 0.603);
+    background-color: rgba(59, 124, 92, 0.788);
     text-align: center;
 }
 .column .color {
     width: 100%;
-    background-color:#fbff06d5;
+    background-color:#fbff06f8;
     height: 90%;
     margin-bottom: 10px;
 }
