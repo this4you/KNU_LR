@@ -15,43 +15,93 @@ class Diagram {
         this.colums = [];
         this.mainContainer = mainContainer;
     }
-    _setColumnSize() {
-        this.colums.sort(function (a, b) {
-            a.value - b.value;
+    changeMeasure(value) {
+        if (!this.maxMeasure || (+this.maxMeasure < +value)) {
+            this.maxMeasure = value;
+            this._changeColumsMaxMeasure();
+        }
+    }
+    findNewMaxMeasure() {
+        var max = this.colums.reduce((prev, cur) => {
+            if (+prev.measureValue > +cur.measureValue) {
+                return prev;
+            }
+            return cur;
+        })
+        this.maxCol = max;
+        this.maxMeasure = max.measureValue;
+        this._changeColumsMaxMeasure();
+        
+    }
+    _changeColumsMaxMeasure() {
+        this.colums.forEach((item) => {
+            item.maxMeasure = this.maxMeasure;
         });
+    }
+    _setColumnSize() {
+        // this.colums.sort(function (a, b) {
+        //     a.value - b.value;
+        // });
         let columnWidth = 100 / this.colums.length - (100 / this.colums.length) * 0.2;
         this.colums.forEach(element => {
             element.width = columnWidth;
         });
     }
     addColumn(column) {
+        if (this.maxMeasure) {
+            column.maxMeasure = this.maxMeasure;
+        }
         this.colums.push(column);
         this._setColumnSize();
         column.renderTo(this.mainContainer);
     }
     removeColumn(column) {
         let index = this.colums.indexOf(column);
-        this.colums.splice(index,1);
+        this.colums.splice(index, 1);
+        if(column == this.maxCol) this.findNewMaxMeasure();
         this._setColumnSize();
     }
 }
 class Column {
-    constructor(value) {
+    constructor() {
         this._createHtml();
-        this.value;
+    }
+    set maxMeasure(value) {
+        this.maxMeasureValue = value;
+        this._changeMesureDiv();
     }
     set width(value) {
         this.htmlElem.style.width = value + "%";
+    }
+    set name(value) {
+        this.captionElem.textContent = value;
+    }
+    set measure(value) {
+        if(!Number.isInteger(+value)) return;
+        this.measureValue = value;
+        if (this.maxMeasureValue && (+this.maxMeasureValue >= +this.measureValue)) {
+            this._changeMesureDiv();
+            if (this.row.diagram.maxCol == this)
+                this.row.diagram.findNewMaxMeasure();
+        } else {
+            this.row.diagram.maxCol = this;
+        }
+        this.row.diagram.changeMeasure(value);
+    }
+    _changeMesureDiv(value) {
+        this.measureElem.style.height = this.measureValue * 100 / this.maxMeasureValue + '%';
+
     }
     _createHtml() {
         let mainDiv = document.createElement("div");
         mainDiv.classList.add("column");
         let colorDiv = document.createElement("div");
         colorDiv.classList.add("color");
-        let caption = document.createElement("h4");
-        caption.textContent = "Test";
+        this.measureElem = document.createElement("div");
+        colorDiv.appendChild(this.measureElem);
+        this.captionElem = document.createElement("h4");
         mainDiv.appendChild(colorDiv);
-        mainDiv.appendChild(caption);
+        mainDiv.appendChild(this.captionElem);
         this.htmlElem = mainDiv;
     }
 
@@ -60,10 +110,6 @@ class Column {
     }
 }
 class Row {
-    set value(value) {
-        this.column.value = value;
-        this.value = value;
-    }
     constructor(diagram) {
         this._createHtml();
         this.diagram = diagram;
@@ -74,6 +120,7 @@ class Row {
     }
     _createColumn() {
         let column = new Column();
+        column.row = this;
         this.column = column;
         this.diagram.addColumn(column);
     }
@@ -83,15 +130,19 @@ class Row {
         th.appendChild(this._createDeleteButton());
         th.scope = "row";
         tr.appendChild(th);
-        tr.appendChild(this._createTd());
-        tr.appendChild(this._createTd());
+        tr.appendChild(this._createTd("name"));
+        tr.appendChild(this._createTd("measure"));
         this.htmlElem = tr;
     }
 
-    _createTd(innerText) {
+    _createTd(property) {
         let td = document.createElement("td");
-        td.textContent = innerText;
+        td.dataset.property = property;
         td.setAttribute("contenteditable", true)
+        td.addEventListener("input", (event) => {
+            let target = event.target;
+            this.column[property] = target.textContent;
+        });
         return td;
     }
 
@@ -117,5 +168,5 @@ let diagram = new Diagram(diagramContainer);
 button.onclick = function () {
     let row = new Row(diagram);
     row.renderTo(tableBody);
-   
+
 }
