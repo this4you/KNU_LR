@@ -38,4 +38,12 @@
     align-items:  flex-end;
     margin-bottom: 10px;
 }
+.alert {
+    position: absolute !important;
+    padding: 15px;
+    background: rgba(104, 0, 90, 0.61);;
+    border-radius: 4px;
+    color: white;
+    display: none;
+}
 

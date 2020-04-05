@@ -2,6 +2,28 @@
 let button = document.getElementById("addRecordButton");
 let tableBody = document.getElementById("setting-table-body");
 let diagramContainer = document.getElementById("diagram");
+var div = document.createElement('div');
+div.textContent = "Test";
+div.classList.add('alert');
+diagramContainer.appendChild(div);
+diagramContainer.addEventListener('mousemove', function (e) {
+    let target = event.target;
+    if (Array.prototype.indexOf.call(target.classList, 'measure') != -1) {
+        let top = e.pageY + 10 + 'px';
+        let left = e.pageX + 10 + 'px';
+        div.textContent = target.dataset.measure;
+        div.style.top = top;
+        div.style.left = left;
+        div.style.display = 'block';
+    }
+});
+diagramContainer.addEventListener('mouseout', function(e) {
+    let target = event.target;
+    if (Array.prototype.indexOf.call(target.classList, 'measure') != -1) {
+        div.style.display = 'none';
+    }
+});
+
 
 // tableBody.onclick = function (event) {
 //     let target = event.target;
@@ -31,7 +53,7 @@ class Diagram {
         this.maxCol = max;
         this.maxMeasure = max.measureValue;
         this._changeColumsMaxMeasure();
-        
+
     }
     _changeColumsMaxMeasure() {
         this.colums.forEach((item) => {
@@ -39,9 +61,6 @@ class Diagram {
         });
     }
     _setColumnSize() {
-        // this.colums.sort(function (a, b) {
-        //     a.value - b.value;
-        // });
         let columnWidth = 100 / this.colums.length - (100 / this.colums.length) * 0.2;
         this.colums.forEach(element => {
             element.width = columnWidth;
@@ -58,8 +77,12 @@ class Diagram {
     removeColumn(column) {
         let index = this.colums.indexOf(column);
         this.colums.splice(index, 1);
-        if(column == this.maxCol) this.findNewMaxMeasure();
+        if (column == this.maxCol && this.columns > 0) this.findNewMaxMeasure();
         this._setColumnSize();
+        if (this.colums.length === 0) {
+            this.maxMeasure = 0;
+            this.maxCol = null;
+        }
     }
 }
 class Column {
@@ -77,7 +100,8 @@ class Column {
         this.captionElem.textContent = value;
     }
     set measure(value) {
-        if(!Number.isInteger(+value)) return;
+        if (!Number.isInteger(+value)) return;
+        this.measureElem.dataset.measure = value;
         this.measureValue = value;
         if (this.maxMeasureValue && (+this.maxMeasureValue >= +this.measureValue)) {
             this._changeMesureDiv();
@@ -98,6 +122,7 @@ class Column {
         let colorDiv = document.createElement("div");
         colorDiv.classList.add("color");
         this.measureElem = document.createElement("div");
+        this.measureElem.classList.add('measure');
         colorDiv.appendChild(this.measureElem);
         this.captionElem = document.createElement("h4");
         mainDiv.appendChild(colorDiv);
