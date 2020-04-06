@@ -30,7 +30,7 @@ form.onsubmit = function (e) {
 
 function setStyle(elem) {
     let styleProperty = elem.dataset.styleProperty;
-    if (styleProperty in elem) {
+    if (styleProperty in image) {
         image[styleProperty] = elem.value;
     } else {
         let dimension = elem.dataset.styleDimension || "";

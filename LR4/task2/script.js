@@ -2,36 +2,29 @@
 let button = document.getElementById("addRecordButton");
 let tableBody = document.getElementById("setting-table-body");
 let diagramContainer = document.getElementById("diagram");
-var div = document.createElement('div');
-div.textContent = "Test";
-div.classList.add('alert');
-diagramContainer.appendChild(div);
+let alertDiv = document.createElement('div');
+
+// alert region
+alertDiv.classList.add('alert');
+diagramContainer.appendChild(alertDiv);
 diagramContainer.addEventListener('mousemove', function (e) {
     let target = event.target;
     if (Array.prototype.indexOf.call(target.classList, 'measure') != -1) {
         let top = e.pageY + 10 + 'px';
         let left = e.pageX + 10 + 'px';
-        div.textContent = target.dataset.measure;
-        div.style.top = top;
-        div.style.left = left;
-        div.style.display = 'block';
+        alertDiv.textContent = target.dataset.measure;
+        alertDiv.style.top = top;
+        alertDiv.style.left = left;
+        alertDiv.style.display = 'block';
     }
 });
-diagramContainer.addEventListener('mouseout', function(e) {
+diagramContainer.addEventListener('mouseout', function (e) {
     let target = event.target;
     if (Array.prototype.indexOf.call(target.classList, 'measure') != -1) {
-        div.style.display = 'none';
+        alertDiv.style.display = 'none';
     }
 });
-
-
-// tableBody.onclick = function (event) {
-//     let target = event.target;
-//     if (target.tagName == "BUTTON") {
-//         var line = event.target.closest("tr");
-//         line.remove();
-//     }
-// }
+// end alert region
 class Diagram {
     constructor(mainContainer) {
         this.colums = [];
@@ -77,7 +70,7 @@ class Diagram {
     removeColumn(column) {
         let index = this.colums.indexOf(column);
         this.colums.splice(index, 1);
-        if (column == this.maxCol && this.columns > 0) this.findNewMaxMeasure();
+        if (column == this.maxCol && this.colums.length > 0) this.findNewMaxMeasure();
         this._setColumnSize();
         if (this.colums.length === 0) {
             this.maxMeasure = 0;
@@ -193,5 +186,4 @@ let diagram = new Diagram(diagramContainer);
 button.onclick = function () {
     let row = new Row(diagram);
     row.renderTo(tableBody);
-
 }
