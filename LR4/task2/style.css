@@ -1,0 +1,49 @@
+.setting-section button {
+    margin-left: 30px;
+}
+.display-section {
+    height:90vh;
+}
+.diagram {
+    height: 100%;
+    width: 100%;
+    background-color:rgba(104, 0, 90, 0.61);
+    display: flex;
+    justify-content: space-around;
+    align-items:  flex-end;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 20px;
+}
+.column {
+    width: 40%;
+    height: 100%;
+    text-align: center;
+}
+.column h4 {
+    display: inline-block;
+    background-color: rgba(59, 124, 92, 0.788);
+    width: 100%;
+    padding: 5px;
+}
+.color>div {
+    width: 100%;
+    height: 0%;
+    background-color:#fbff06f8;
+}
+.column .color {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items:  flex-end;
+    margin-bottom: 10px;
+}
+.alert {
+    position: absolute !important;
+    padding: 15px;
+    background: rgba(104, 0, 90, 0.61);;
+    border-radius: 4px;
+    color: white;
+    display: none;
+}
+
