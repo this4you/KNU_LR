@@ -1,0 +1,28 @@
+.users {
+  margin:  30px auto;
+}
+.users ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.users ul li {  
+  flex-grow: 1;
+  flex-basis: 180px;
+  display: block;
+  /*flex-shrink: 3;*/
+  list-style:none;
+  font: 15px Verdana, Helvetica, Sans-serif;
+  width:  180px;
+  max-width: 180px;
+  margin: 2% 4% 40px 2%;
+}
+
+.user-box {
+  padding: 10px;
+  border: 2px solid rgb(80, 72, 72);
+  border-radius: 15px;
+  height: 140px;
+}
+
