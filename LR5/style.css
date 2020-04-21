@@ -1,0 +1,25 @@
+.pictures {
+    margin:  30px auto;
+}
+.pictures ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pictures ul li {
+    flex-grow: 1;
+    flex-basis: 180px;
+    /*flex-shrink: 3;*/
+    list-style:none;
+    font: 10px/1.5 Verdana, Helvetica, Sans-serif;
+    width: 15%;
+    margin: 2% 4% 40px 2%;
+}
+li img {
+   max-width: 100%;
+}
+#placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
