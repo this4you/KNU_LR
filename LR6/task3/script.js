@@ -1,19 +1,20 @@
 $(document).ready(function () {
-    let type = "countDown"; // countUp Or countDown
-    let duration = moment.duration({
-        'minutes': '1',
-        'seconds': '00'
+    const type = "countDown"; // countUp Or countDown
+    const duration = moment.duration({
+        'minutes': '00',
+        'seconds': '05'
     });
+    const firstButton = $('.buttons').children().first();
 
     let step = '1';
     let intervalId;
     let startTimestamp;
-    let firstButton = $('.buttons').children().first();
+    
 
     initStartTimestamp();
 
     firstButton.click(() => {
-        onTimerChange(intervalId == undefined);
+        onTimerChange(!intervalId);
     });
 
     $('button:eq(1)').click(() => {
@@ -28,7 +29,7 @@ $(document).ready(function () {
             firstButton.text("STOP");
         } else {
             clearInterval(intervalId);
-            intervalId = undefined;
+            intervalId = null;
             firstButton.text("GO");
         }
     }

@@ -2,9 +2,9 @@
 $(document).ready(function () {
     $('#loginform').submit(function (e) {
         e.preventDefault();
-        let $form = $(this);
+        const $form = $(this);
         if (!$form.valid()) return false;
-        let dataObject = {};
+        const dataObject = {};
         $form.serializeArray().forEach((el)=> {
             dataObject[el.name] = el.value;
         })
